@@ -1,12 +1,19 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+import 'package:news_app/common/error/failure_model.dart';
 import 'package:news_app/common/network/network_contes.dart';
-import 'package:news_app/models/articles_model.dart';
-import 'package:news_app/models/source_mode.dart';
+import 'package:news_app/features/articles/data/data_source/articles_data_source.dart';
+import 'package:news_app/features/articles/data/models/articles_model.dart';
+import 'package:news_app/features/articles/data/models/source_mode.dart';
 
-class ApisService {
-  static Dio dio = Dio(BaseOptions(baseUrl: NetworkContes.baseUrl));
+@LazySingleton(as: ArticlesDataSource)
+class ApisDataSource extends ArticlesDataSource {
+  final Dio dio;
 
-  static Future<SourceModel?> getSources(String category) async {
+  ApisDataSource({required this.dio});
+
+  @override
+  Future<SourceModel> getSources(String category) async {
     try {
       Response response = await dio.get(
         NetworkContes.sourcesEndPoint,
@@ -19,13 +26,14 @@ class ApisService {
         throw sourceModel.message ?? 'something went wrong';
       }
     } on DioException catch (e) {
-      throw e.message ?? 'something went wrong';
+      throw FailureModel.getNetworkFailure(e);
     } catch (e) {
-      throw e.toString();
+      throw BaseFailure(errorMEssage: e.toString());
     }
   }
 
-  static Future<ArticlesModel> getArticles(String sourceId) async {
+  @override
+  Future<ArticlesModel> getArticles(String sourceId) async {
     try {
       Response response = await dio.get(
         NetworkContes.articlesEndPoint,
@@ -38,9 +46,9 @@ class ApisService {
         throw articlesModel.message ?? 'something went wrong';
       }
     } on DioException catch (e) {
-      throw e.message ?? 'something went wrong';
+      throw FailureModel.getNetworkFailure(e);
     } catch (e) {
-      throw e.toString();
+      throw BaseFailure(errorMEssage: e.toString());
     }
   }
 }
