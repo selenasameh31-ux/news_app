@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/common/extention/theme_extention.dart';
-import 'package:news_app/enums/category_enum.dart';
-import 'package:news_app/providers/category_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:news_app/features/categories/model/enums/category_enum.dart';
+import 'package:news_app/features/categories/view_model/category_cubit.dart';
+import 'package:news_app/features/categories/view_model/category_provider.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({
@@ -15,7 +17,7 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Provider.of<CategoryProvider>(
+      onTap: () => BlocProvider.of<CategoryCubit>(
         context,
         listen: false,
       ).selectCategory(categoryEnum),
@@ -37,7 +39,7 @@ class CategoryCard extends StatelessWidget {
             Text(
               categoryEnum.name,
               style: context.getTextTheme.displayLarge!.copyWith(
-                fontSize: 24,
+                fontSize: 24.sp,
                 color: context.getTheme.colorScheme.secondary,
               ),
             ),
@@ -54,8 +56,8 @@ class CategoryCard extends StatelessWidget {
                   if (!isRight)
                     Container(
                       margin: EdgeInsets.only(right: 8),
-                      height: 54,
-                      width: 54,
+                      height: 54.r,
+                      width: 54.r,
                       padding: EdgeInsets.only(left: 5),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
@@ -76,16 +78,16 @@ class CategoryCard extends StatelessWidget {
                     child: Text(
                       'View All',
                       style: context.getTextTheme.titleLarge!.copyWith(
-                        fontSize: 24,
+                        fontSize: 24.sp,
                       ),
                     ),
                   ),
 
                   if (isRight)
                     Container(
-                      margin: EdgeInsets.only(left: 8),
-                      height: 54,
-                      width: 54,
+                      margin: EdgeInsets.only(left: 8.w),
+                      height: 54.r,
+                      width: 54.r,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: context.getTheme.scaffoldBackgroundColor,

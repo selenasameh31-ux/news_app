@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/providers/category_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/features/categories/view_model/category_cubit.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});
@@ -27,7 +27,7 @@ class HomeDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
-              Provider.of<CategoryProvider>(
+              BlocProvider.of<CategoryCubit>(
                 context,
                 listen: false,
               ).emptyCategory();
