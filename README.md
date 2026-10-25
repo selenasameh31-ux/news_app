@@ -1,16 +1,24 @@
-# news_app
+ 📰 News App (Flutter)
 
-A new Flutter project.
+A Flutter news application that delivers the latest news across multiple categories.
 
-## Getting Started
+ ✨ Features
+- Browse news by category
+- Category details with a list of articles
+- Cached network images and "time ago" timestamps for articles
 
-This project is a starting point for a Flutter application.
+ 🧩 Tech Stack
+- Flutter & Dart
+- MVVM architecture
+- State management: flutter_bloc
+- Networking: Dio (REST API)
+- Dependency injection: get_it & injectable
+- UI: flutter_screenutil, cached_network_image, timeago
+- Assets code generation: flutter_gen
 
-A few resources to get you started if this is your first Flutter project:
+ 🚀 Getting Started
+    flutter pub get
+    dart run build_runner build --delete-conflicting-outputs
+    flutter run
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> Note: if the API requires a key, add it in the project's constants file before running.
